@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clicker</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+ body{margin:0;font-family:sans-serif;background:#111;color:#fff;text-align:center;padding:30px}
+ button{font-size:26px;padding:18px 36px;border-radius:16px;border:0;background:#ffcc00;font-weight:bold}
+ .shop{margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+ .shop button{font-size:16px;padding:12px 16px;background:#222;color:#fff;border:1px solid #444}
+</style>
+</head>
+<body>
+<h1>💰 Кликер</h1>
+<p id="hello"></p>
+<button onclick="tap()">CLICK +25</button>
+<div class="shop">
+ <button onclick="buy('buy_hat')">🎩 Hat</button>
+ <button onclick="buy('buy_glasses')">🕶️ Glasses</button>
+ <button onclick="buy('buy_diamond')">💎 Diamond</button>
+</div>
+<script>
+ Telegram.WebApp.ready();
+ Telegram.WebApp.expand();
+ document.getElementById('hello').innerText = "Привет, " + (Telegram.WebApp.initDataUnsafe.user?.first_name || "игрок");
+ function tap(){ Telegram.WebApp.sendData(JSON.stringify({action:"click"})); }
+ function buy(a){ Telegram.WebApp.sendData(JSON.stringify({action:a})); }
+</script>
+</body>
+</html>
